@@ -6,9 +6,11 @@ from langchain_community.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chat_models import ChatOpenAI
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Set your OpenRouter API Key here
-os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+api_key=os.environ["OPENAI_API_KEY"]
 
 # Load and read PDF
 st.title("RAG Chatbot using OpenRouter.ai")
@@ -36,7 +38,7 @@ if pdf:
         # Load LLM from OpenRouter
         llm = ChatOpenAI(
             openai_api_base="https://openrouter.ai/api/v1",
-            openai_api_key=os.environ["OPENAI_API_KEY"],
+            openai_api_key=api_key,
             model="mistralai/mixtral-8x7b-instruct",  # You can also use llama-3 or others
             temperature=0.5
         )
